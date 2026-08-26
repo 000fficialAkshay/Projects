@@ -1,0 +1,1 @@
+This is to check that new page is created
