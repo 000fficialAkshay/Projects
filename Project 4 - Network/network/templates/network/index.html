@@ -1,0 +1,50 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    <h3 style="padding: 5px;">All Posts</h3>
+    {% if user.is_authenticated %}
+        <h2 style="padding: 5px;">New Post: </h2>
+        <form action="{% url 'post' %}" method="POST" style="padding: 5px;">
+            {% csrf_token %}
+            <textarea name="content"></textarea>
+            <button type="submit">Post</button>
+        </form>
+    {% endif %}
+    {% for item in postsWithLikes %}
+        <p style="padding: 5px;">
+            User:
+            <a href="{% url 'profile' item.post.user.username %}">
+                {{ item.post.user.username }}
+            </a>
+        </p>
+        <p style="padding: 5px;" id="content-{{ item.post.id }}">Content: {{ item.post.content }}</p>
+        <p style="padding: 5px;">Timestamp: {{ item.post.timestamp }}</p>
+        <p style="padding: 5px;" id="likes-{{ item.post.id }}">Likes: {{ item.likes }}</p>
+        {% if user != item.post.user %}
+            {% if item.isLiked %}
+                <button type="button" class="likeButton" data-post-id="{{ item.post.id }}">Dislike</button>
+            {% else %}
+                <button type="button" class="likeButton" data-post-id="{{ item.post.id }}">Like</button>
+            {% endif %}
+        {% endif %}
+        {% if user == item.post.user %}
+            <button class="editButton" data-post-id="{{ item.post.id }}">Edit</button>
+        {% endif %}
+    {% endfor %}
+    {% if pageObj.has_previous %}
+        <a href="?page={{ pageObj.previous_page_number }}">
+            <button>Previous</button>
+        </a>
+    {% endif %}
+
+    {% if pageObj.has_next %}
+        <a href="?page={{ pageObj.next_page_number }}">
+            <button>Next</button>
+        </a>
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}

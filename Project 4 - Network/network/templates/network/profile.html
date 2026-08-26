@@ -1,0 +1,49 @@
+{% extends "network/layout.html" %}
+{% load static %}
+
+{% block body %}
+    {% if user.is_authenticated %}
+        <h3>{{ profile }}</h3>
+        <h4>Followers: {{ followers }}</h4>
+        <h4>Following: {{ following }}</h4>
+        {% for post in posts %}
+            <p style="padding: 5px;">User: {{ post.user }}</p>
+            <p style="padding: 5px;" id="content-{{ post.id }}">Content: {{ post.content }}</p>
+            <p style="padding: 5px;">Timestamp: {{ post.timestamp }}</p>
+            <p style="padding: 5px;">Likes: {{ post.like_set.count }}</p>
+            {% if user == post.user %}
+                <button class="editButton" data-post-id="{{ post.id }}">
+                    Edit
+                </button>
+            {% endif %}
+        {% endfor %}
+        <form method="POST">
+            {% csrf_token %}
+            {% if user != profile %}
+                {% if isFollowing %}
+                    <button type="submit" name="action" value="unfollow">
+                        Unfollow
+                    </button>
+                {% else %}
+                    <button type="submit" name="action" value="follow">
+                        Follow
+                    </button>
+                {% endif %}
+            {% endif %}
+        </form>
+        {% if pageObj.has_previous %}
+            <a href="?page={{ pageObj.previous_page_number }}">
+                <button>Previous</button>
+            </a>
+        {% endif %}
+        {% if pageObj.has_next %}
+            <a href="?page={{ pageObj.next_page_number }}">
+                <button>Next</button>
+            </a>
+        {% endif %}
+    {% endif %}
+{% endblock %}
+
+{% block script %}
+    <script src="{% static 'network/index.js' %}"></script>
+{% endblock %}
