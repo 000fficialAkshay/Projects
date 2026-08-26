@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Advanced Search</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            color: #202124;
+            background-color: white;
+        }
+
+        header {
+            height: 70px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0 25px;
+        }
+
+        .logo {
+            font-size: 32px;
+            color: #4285F4;
+            text-decoration: none;
+        }
+
+        header a {
+            color: #202124;
+            text-decoration: none;
+            font-size: 14px;
+        }
+
+        header a:hover {
+            text-decoration: underline;
+        }
+
+        .title {
+            color: #d93025;
+            font-size: 20px;
+            padding: 25px 45px;
+            border-bottom: 1px solid #ebebeb;
+        }
+
+        .container {
+            max-width: 900px;
+            padding: 40px 45px;
+        }
+
+        h2 {
+            font-size: 16px;
+            font-weight: normal;
+            margin-bottom: 30px;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 220px 1fr;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-size: 14px;
+        }
+
+        input[type="text"] {
+            height: 35px;
+            border: 1px solid #d9d9d9;
+            padding: 8px;
+            font-size: 14px;
+        }
+
+        input[type="text"]:focus {
+            outline: none;
+            border: 1px solid #4285f4;
+            box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1);
+        }
+
+        .button-container {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+        input[type="submit"] {
+            background-color: #4d90fe;
+            color: white;
+            border: 1px solid #3079ed;
+            border-radius: 2px;
+            padding: 10px 15px;
+            font-size: 12px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #357ae8;
+        }
+
+        @media (max-width: 600px) {
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 8px;
+            }
+
+            .container {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a class="logo" href="index.html">Google</a>
+        <a href="index.html">Google Search</a>
+    </header>
+
+    <div class="title">Advanced Search</div>
+
+    <div class="container">
+        <h2>Find pages with...</h2>
+
+        <form action="https://www.google.com/search" method="get">
+
+            <div class="form-row">
+                <label>All these words:</label>
+                <input type="text" name="as_q">
+            </div>
+
+            <div class="form-row">
+                <label>This exact word or phrase:</label>
+                <input type="text" name="as_epq">
+            </div>
+
+            <div class="form-row">
+                <label>Any of these words:</label>
+                <input type="text" name="as_oq">
+            </div>
+
+            <div class="form-row">
+                <label>None of these words:</label>
+                <input type="text" name="as_eq">
+            </div>
+
+            <div class="form-row">
+                <div></div>
+
+                <div class="button-container">
+                    <input type="submit" value="Advanced Search">
+                </div>
+            </div>
+
+        </form>
+    </div>
+
+</body>
+</html>
