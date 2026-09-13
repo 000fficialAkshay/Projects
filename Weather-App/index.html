@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple weather application using the OpenWeatherMap API.">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="cloud-background" aria-hidden="true">
+        <div class="cloud c1"></div>
+        <div class="cloud c2"></div>
+        <div class="cloud c3"></div>
+    </div>
+
+    <main class="app">
+        <form class="weatherForm">
+            <label class="sr-only" for="cityInput">City</label>
+            <input
+                type="text"
+                id="cityInput"
+                class="cityInput"
+                placeholder="Enter city"
+                autocomplete="off"
+                maxlength="80"
+                required
+            >
+            <button type="submit">Get Weather</button>
+        </form>
+
+        <p class="statusMessage" aria-live="polite"></p>
+
+        <section class="card" aria-live="polite" aria-atomic="true" hidden></section>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+</html>
