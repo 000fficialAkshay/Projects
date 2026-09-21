@@ -1,0 +1,9 @@
+{
+  "manifest_version": 3,
+  "name": "Anime New Tab Randomizer",
+  "version": "1.0.1",
+  "description": "Shows a random anime image on each new tab",
+  "chrome_url_overrides": {
+    "newtab": "newtab.html"
+  }
+}
