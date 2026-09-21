@@ -1,0 +1,39 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+
+<div class="container statistics-page">
+
+    <h2>Statistics</h2>
+
+    <div class="stat-card">
+        <h3>Monthly Time</h3>
+
+        <p>
+            <strong>Planned:</strong> {{ planned_time }}
+        </p>
+
+        <p>
+            <strong>Actual:</strong> {{ actual_time }}
+        </p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Daily Streak</h3>
+
+        <p class="stat-value">
+            {{ daily_streak }} days
+        </p>
+    </div>
+
+    <div class="stat-card">
+        <h3>Most Tasks Completed</h3>
+
+        <p class="stat-value">
+            {{ most_tasks }} tasks
+        </p>
+    </div>
+
+</div>
+
+{% endblock %}

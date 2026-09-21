@@ -1,0 +1,76 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+
+<h2>Good Evening, {{ request.user.username }}</h2>
+<p><b>Today's commitment: {{ daily_tasks|length }} tasks</b></p>
+
+<!-- Today's Tasks -->
+
+<div class="cardContainer daily-task-message">
+    <div class="card">
+        {% for daily_task in daily_tasks %}
+        <div class="daily-task"
+             data-daily-task-id="{{ daily_task.id }}"
+             data-actual-seconds="{{ daily_task.actual_seconds }}"
+             data-completed="{{ daily_task.completed|yesno:'true,false' }}">
+            <p>{{ daily_task.task.name }}</p>
+            <p>Planned: {{ daily_task.planned_minutes }} mins</p>
+            <p class="timer">00:00:00</p>
+            {% if not daily_task.completed %}
+                <button class="start">Start</button>
+                <button class="stop">Stop</button>
+                <button class="complete"
+                        data-daily-task-id="{{ daily_task.id }}">
+                    Complete Task
+                </button>
+            {% endif %}
+        </div>
+        {% empty %}
+        <p>No tasks scheduled for today.</p>
+        {% endfor %}
+    </div>
+</div>
+
+<!-- Dashboard Bottom -->
+
+<div class="dashboardBottom">
+
+    <!-- Today's Time -->
+
+    <div class="todayTime">
+        <h2>TODAY'S TIME</h2>
+        <p><b>Planned: {{ planned_time }}</b></p>
+        <p><b>Actual: {{ actual_time }}</b></p>
+    </div>
+
+    <!-- Consistency Calendar -->
+
+    <div class="activity-calendar">
+        <h2>Consistency Calendar</h2>
+        <h3>{{ month_name }}</h3>
+        <div class="calendar-days">
+            {% for day in calendar_days %}
+                <div class="calendar-day {% if day and day.active %}active{% endif %}">
+                    {% if day %}
+                        {{ day.date.day }}
+                    {% endif %}
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <!-- Recent Results -->
+
+    <div class="recent-results">
+        <h2>Recent Results:</h2>
+        {% if recent_result %}
+            <p><b>{{ recent_result.task.name }}</b></p>
+            <p>{{ recent_result_time }}</p>
+        {% else %}
+            <p>No completed tasks yet.</p>
+        {% endif %}
+    </div>
+</div>
+
+{% endblock %}

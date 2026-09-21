@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Learning Tracker</title>
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'tracker/layout.css' %}">
+    <script src="{% static 'tracker/index.js' %}" defer></script>
+</head>
+
+<body>
+
+    <div class="container">
+
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <h1>Learning Tracker</h1>
+
+            <a href="{% url 'dashboard' %}">Dashboard</a>
+            <a href="{% url 'courses' %}">Courses</a>
+            <a href="{% url 'history' %}">History</a>
+            <a href="{% url 'statistics' %}">Statistics</a>
+
+            <div class="logout">
+                <a href="{% url 'logout' %}">Logout</a>
+            </div>
+        </div>
+
+        <!-- Page-specific content -->
+        {% block body %}
+        {% endblock %}
+
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,78 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+
+<h1>Courses</h1>
+
+<a href="{% url 'addCourses' %}">Add Course</a>
+
+{% for course in courses %}
+<details>
+    <summary>
+        {{ course.name }}
+    </summary>
+    
+    <div class="course-progress">
+        <div class="course-progress-bar">
+            <div class="course-progress-fill" style="width: {{ course.completion_percentage }}%;"></div>
+        </div>
+        <span>{{ course.completion_percentage }}%</span>
+    </div>
+
+    {% if course.resource_url %}
+        <a href="{{ course.resource_url }}" target="_blank">Resource</a>
+    {% endif %}
+    <a href="{% url 'editCourse' course.id %}">Edit</a>
+    <a href="{% url 'deleteCourse' course.id %}">Delete</a>
+
+    <a href="{% url 'addPart' course.id %}">Add Part</a>
+
+    {% for part in course.parts.all %}
+    <details>
+
+        <summary>
+            {{ part.name }}
+        </summary>
+
+        <a href="{% url 'editPart' part.id %}">Edit</a>
+        <a href="{% url 'deletePart' part.id %}">Delete</a>
+
+        {% if not part.completed %}
+            <button class="complete-part" data-part-id="{{ part.id }}">
+                Complete Part
+            </button>
+        {% else %}
+            <button class="revert-part" data-part-id="{{ part.id }}">
+                Revert Part
+            </button>
+        {% endif %}
+
+        <a href="{% url 'addTask' part.id %}">Add Task</a>
+
+        {% for task in part.tasks.all %}
+            <p>
+                {{ task.name }}
+
+                {% if task.resource_url %}
+                    <a href="{{ task.resource_url }}" target="_blank">Resource</a>
+                {% endif %}
+
+                <a href="{% url 'editTask' task.id %}">Edit</a>
+                <a href="{% url 'deleteTask' task.id %}">Delete</a>
+                <a href="{% url 'addDailyTask' task.id %}">Add to Daily Tasks</a>
+            </p>
+        {% empty %}
+            <p>No tasks yet.</p>
+        {% endfor %}
+
+    </details>
+    {% empty %}
+    <p>No parts yet.</p>
+    {% endfor %}
+
+</details>
+{% empty %}
+<p>You don't have any courses yet.</p>
+{% endfor %}
+
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+
+<h1>Add Task</h1>
+
+<p>Part: {{ part.name }}</p>
+
+<form action="{% url 'addTask' part.id %}" method="post">
+    {% csrf_token %}
+
+    <label for="name">Task:</label>
+    <input type="text" id="name" name="name" required>
+
+    <br><br>
+
+    <label for="resource_url">Resource URL:</label>
+    <input type="url" id="resource_url" name="resource_url">
+
+    <br><br>
+
+    <input type="submit" value="Add Task">
+</form>
+
+{% endblock %}

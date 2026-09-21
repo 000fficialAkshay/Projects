@@ -1,0 +1,31 @@
+{% extends "tracker/layout.html" %}
+
+{% block body %}
+
+<h1>Completed Tasks</h1>
+
+<div class="history-list">
+    {% for daily_task in completed_tasks %}
+        <div class="history-card">
+            <h3>{{ daily_task.task.name }}</h3>
+            <p>
+                <strong>Date:</strong>
+                {{ daily_task.date }}
+            </p>
+            <p>
+                <strong>Planned:</strong>
+                {{ daily_task.planned_time }}m
+            </p>
+            <p>
+                <strong>Actual:</strong>
+                {{ daily_task.actual_time }}
+            </p>
+            <button class="revert-task" data-id="{{ daily_task.id }}">Revert
+            </button>
+        </div>
+    {% empty %}
+        <p>No completed tasks yet.</p>
+    {% endfor %}
+</div>
+
+{% endblock %}
